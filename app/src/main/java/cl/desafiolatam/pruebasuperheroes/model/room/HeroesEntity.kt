@@ -1,9 +1,8 @@
-package cl.desafiolatam.pruebasuperheroes.room
+package cl.desafiolatam.pruebasuperheroes.model.room
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import cl.desafiolatam.pruebasuperheroes.data_class.Images
 
 @Entity (tableName = "heroes_entity")
 

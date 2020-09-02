@@ -1,4 +1,4 @@
-package cl.desafiolatam.pruebasuperheroes.data_class
+package cl.desafiolatam.pruebasuperheroes.model.room.data_class
 
 data class Appearance(
     val gender: String,

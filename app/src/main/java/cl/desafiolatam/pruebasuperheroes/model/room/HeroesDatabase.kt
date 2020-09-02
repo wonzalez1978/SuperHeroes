@@ -1,4 +1,4 @@
-package cl.desafiolatam.pruebasuperheroes.room
+package cl.desafiolatam.pruebasuperheroes.model.room
 
 import android.app.Application
 import android.content.Context
@@ -6,10 +6,13 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
+//implementación de Room como una clase abstracta heredando desde RoomDatabase y los métodos
+//correspondientes para inicializar un Singleton o instancia única en la base de datos.
+
 @Database(entities = [HeroesEntity::class], version = 1)
 public abstract class HeroesDatabase : RoomDatabase(){
 
-    abstract fun usersDao() : Dao
+    abstract fun dao() : Dao
 
     companion object {
         // Singleton prevents multiple instances of database opening at the
@@ -34,8 +37,9 @@ public abstract class HeroesDatabase : RoomDatabase(){
             }
         }
     }
-    //
-    /*class MisHeroesApp: Application() {
+    //archivo de Kotlin que será el punto de partida de nuestra aplicación,
+    //en él se iniciará la Base de datos.
+    class MisHeroesApp: Application() {
 
         companion object {
             lateinit var database: HeroesDatabase
@@ -45,5 +49,5 @@ public abstract class HeroesDatabase : RoomDatabase(){
             super.onCreate()
             MisHeroesApp.database =  Room.databaseBuilder(this, HeroesDatabase::class.java, "tasks-db").build()
         }
-    }*/
+    }
 }
