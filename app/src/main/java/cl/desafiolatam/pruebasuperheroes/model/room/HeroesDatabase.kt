@@ -5,11 +5,13 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import cl.desafiolatam.pruebasuperheroes.model.room.data_class.SuperherosEntity
 
 //implementación de Room como una clase abstracta heredando desde RoomDatabase y los métodos
 //correspondientes para inicializar un Singleton o instancia única en la base de datos.
 
-@Database(entities = [HeroesEntity::class], version = 1)
+@Database(entities = [SuperherosEntity::class], version = 1)
+
 public abstract class HeroesDatabase : RoomDatabase(){
 
     abstract fun dao() : Dao
@@ -19,7 +21,7 @@ public abstract class HeroesDatabase : RoomDatabase(){
         // same time.
         @Volatile
         private var INSTANCE: HeroesDatabase? = null
-
+//ESTA FUNSION CREA UNA INSTANCIA QUE CREA LA CONEXION A LA BASE DE DATOS, SINGLETON DE INSTANCIA UNICA
         fun getDatabase(context: Context): HeroesDatabase {
             val tempInstance = INSTANCE
             if (tempInstance != null) {
