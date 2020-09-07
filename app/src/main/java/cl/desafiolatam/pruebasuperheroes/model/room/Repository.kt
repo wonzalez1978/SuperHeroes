@@ -3,6 +3,7 @@ package cl.desafiolatam.pruebasuperheroes.model.room
 import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
+import cl.desafiolatam.pruebasuperheroes.model.room.data_class.Images
 import cl.desafiolatam.pruebasuperheroes.model.room.data_class.SuperherosEntity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -22,6 +23,8 @@ class Repository(context: Context) {
     var heroesDao: Dao = HeroesDatabase.getDatabase(context).dao()
     val getAll: LiveData<List<SuperherosEntity>> = heroesDao.getAll()
     private var lista_heroes = ArrayList<SuperherosEntity>()
+
+
 
 
     /*Estamos pasando el objeto Dao a nuestra clase repositorio. De esta forma solo

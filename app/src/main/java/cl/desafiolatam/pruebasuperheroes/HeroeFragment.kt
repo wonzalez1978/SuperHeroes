@@ -22,24 +22,17 @@ import retrofit2.Response
  * A fragment representing a list of Items.
  */
 class HeroeFragment : Fragment() {
-    private val viewModel: HeroesViewModel by activityViewModels()
-    private var heroesAdapter = HeroesAdapter(mutableListOf())
+   // private val viewModel: HeroesViewModel by activityViewModels()
+    private  lateinit var heroesAdapter : HeroesAdapter
+    val heroesViewModel : HeroesViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-       val view =  inflater.inflate(R.layout.fragmento_heroe, container, false)
+        val view = inflater.inflate(R.layout.fragmento_heroe, container, false)
 
-        return view
-
-    }
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        Log.d("onViewCreated", "respuesta creada")
-        val recyclerview = recyclerViewLista
-        recyclerview.adapter = heroesAdapter
-        val heroesViewModel : HeroesViewModel by activityViewModels()
+        heroesAdapter = HeroesAdapter(mutableListOf())
 
         //creamos el viewModel Observer
         heroesViewModel.getAll.observe(viewLifecycleOwner, Observer {
@@ -47,12 +40,23 @@ class HeroeFragment : Fragment() {
 
         })
         heroesAdapter.heroSelected.observe(viewLifecycleOwner, Observer {
-            Log.d("fragment", "${it.id}")
+            heroesViewModel.select(it)
+
+            Log.d("fragment", "+++++++++++++++${it.id} +++++++++++++++")
             requireActivity().supportFragmentManager.beginTransaction().replace(
                 R.id.container_fragment,
-                Fragment_Hero_Details.newInstance(param1 = "", param2 = ""),"DETALLE"
-            ).addToBackStack("LO QUE SEA").commit()
+                Fragment_Hero_Details.newInstance(), "DETALLE"
+            ).addToBackStack(" ").commit()
         })
+        return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        Log.d("onViewCreated", "respuesta creada")
+        val recyclerview = recyclerViewLista
+        recyclerview.adapter = heroesAdapter
+
 
     }
 }

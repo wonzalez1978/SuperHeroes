@@ -12,8 +12,9 @@ interface Dao {
     @Query("SELECT * FROM heroes_table")
    fun getAll(): LiveData<List<SuperherosEntity>>
 
+
      @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertHeroe (hero: SuperherosEntity )
+     fun insertHeroe (hero: SuperherosEntity )
 
 
 }
